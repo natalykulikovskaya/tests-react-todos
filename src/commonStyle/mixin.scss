@@ -1,0 +1,17 @@
+@mixin flexColumn($jContent: center, $aItem: center) {
+  display: flex;
+  flex-direction: column;
+  align-items: $aItem;
+  justify-content: $jContent;
+}
+
+@mixin flexRow($jContent: center, $aItem: center) {
+  display: flex;
+  flex-direction: row;
+  align-items: $aItem;
+  justify-content: $jContent;
+}
+
+@mixin widthContainer($width: 100%) {
+  width: $width;
+}

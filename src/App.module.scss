@@ -1,0 +1,8 @@
+@import 'commonStyle/index';
+
+.container {
+  height: 100vh;
+  margin: $margin32;
+  @include flexColumn(flex-start);
+  @include widthContainer();
+}
