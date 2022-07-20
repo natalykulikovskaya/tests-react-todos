@@ -2,7 +2,7 @@ import { axiosInstance } from "./instance";
 import { AxiosResponse } from "axios";
 import { Todo } from "../type/todo";
 
-export const fetchTodos = async (): Promise<AxiosResponse<Todo[]>> => {
+export const fetchTodos = async (): Promise<Todo[]> => {
     try {
         const url = `/todos`
         const result = await axiosInstance.get(url);
@@ -13,7 +13,7 @@ export const fetchTodos = async (): Promise<AxiosResponse<Todo[]>> => {
 }
 
 
-export const addTodo = async (todo: Todo): Promise<AxiosResponse<Todo>> => {
+export const addTodo = async (todo: Todo): Promise<Todo> => {
     try {
         const url = `/add-todo`
         const result = await axiosInstance.post(url, todo);
@@ -23,7 +23,7 @@ export const addTodo = async (todo: Todo): Promise<AxiosResponse<Todo>> => {
     }
 }
 
-export const deleteTodo = async (id: string): Promise<AxiosResponse<Todo>> => {
+export const deleteTodo = async (id: string): Promise<Todo> => {
     try {
         const url = `/add-todo/${id}`
         const result = await axiosInstance.delete(url);
@@ -33,7 +33,7 @@ export const deleteTodo = async (id: string): Promise<AxiosResponse<Todo>> => {
     }
 }
 
-export const editTodo = async (todo: Todo): Promise<AxiosResponse<Todo>> => {
+export const editTodo = async (todo: Todo): Promise<Todo> => {
     try {
         const url = `/change-todo:${todo?.id}`
         const result = await axiosInstance.put(url, todo);
