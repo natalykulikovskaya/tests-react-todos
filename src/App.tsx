@@ -3,15 +3,19 @@ import { Todos } from "./components/Todos/Todos";
 import { Layout } from "./components/Layout";
 import { AddingTodo } from "./components/AddingTodo";
 import className from './App.module.scss';
+import { Provider } from "react-redux";
+import { store } from './redux/store';
 
 function App() {
   return (
-    <Layout>
-      <main className={className.container}>
-        <AddingTodo />
-        <Todos />
-      </main>
-    </Layout>
+      <Provider store={store}>
+          <Layout>
+              <main className={className.container}>
+                  <AddingTodo />
+                  <Todos />
+              </main>
+          </Layout>
+      </Provider>
   );
 }
 

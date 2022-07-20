@@ -1,13 +1,10 @@
 import { Todo } from "../../type/todo";
 import className from './Todos.module.scss';
+import { useSelector } from "react-redux";
+import { todosSelector } from "../../redux/todosSelector";
 
 export const Todos = () => {
-    const todos: Todo[] = [
-        {id: 'qqq', name:'sdfsdf'},
-        {id: 'www', name:'sdfsdf'},
-        {id: 'eee', name:'sdfsdf'},
-        {id: 'aaaa', name:'sdfsdf'},
-    ];
+    const todos: Todo[] = useSelector(todosSelector);
     return (
     <ul className={className.lists}>
         {todos.map(({id, name}) => (
