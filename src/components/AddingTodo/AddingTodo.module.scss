@@ -1,7 +1,7 @@
 @import '../../commonStyle/index';
 
 .container {
-  @include flexRow;
+  @include flexRow(_, flex-end);
 
   .label {
     font-size: 1rem;
@@ -13,6 +13,10 @@
     border: $border;
     border-radius: $radius;
     margin: 0 $margin16;
+  }
+
+  .inputWrapper {
+    @include flexColumn();
   }
 
   .addButton {
@@ -28,5 +32,11 @@
     &:hover {
       background-color: #0d69f2;
     }
+  }
+
+  .check {
+    width: 24px;
+    height: 24px;
+    border: $border;
   }
 }

@@ -1,10 +1,12 @@
-import { axiosInstance } from "./instance";
 import { AxiosResponse } from "axios";
+
 import { Todo } from "../type/todo";
+
+import { axiosInstance } from "./instance";
 
 export const fetchTodos = async (): Promise<Todo[]> => {
     try {
-        const url = `/todos`
+        const url = `/todo/`
         const result = await axiosInstance.get(url);
         return result?.data;
     } catch (e){
@@ -15,7 +17,7 @@ export const fetchTodos = async (): Promise<Todo[]> => {
 
 export const addTodo = async (todo: Todo): Promise<Todo> => {
     try {
-        const url = `/add-todo`
+        const url = `/todo/`
         const result = await axiosInstance.post(url, todo);
         return result?.data;
     } catch (e){
@@ -23,9 +25,9 @@ export const addTodo = async (todo: Todo): Promise<Todo> => {
     }
 }
 
-export const deleteTodo = async (id: string): Promise<Todo> => {
+export const deleteTodo = async (_id: string): Promise<Todo> => {
     try {
-        const url = `/add-todo/${id}`
+        const url = `/todo/${_id}`
         const result = await axiosInstance.delete(url);
         return result?.data;
     } catch (e){
@@ -35,8 +37,8 @@ export const deleteTodo = async (id: string): Promise<Todo> => {
 
 export const editTodo = async (todo: Todo): Promise<Todo> => {
     try {
-        const url = `/change-todo:${todo?.id}`
-        const result = await axiosInstance.put(url, todo);
+        const url = `/todo/${todo?._id}`
+        const result = await axiosInstance.put(url, {name: todo?.name, status: todo?.status});
         return result?.data;
     } catch (e){
         throw e;
@@ -44,10 +46,10 @@ export const editTodo = async (todo: Todo): Promise<Todo> => {
 }
 
 
-export const checkAllTodo = async (todos: Todo): Promise<AxiosResponse<Todo>> => {
+export const checkAllTodo = async (checkAll: boolean): Promise<AxiosResponse<Todo>> => {
     try {
-        const url = `/change-todo`
-        const result = await axiosInstance.put(url, todos);
+        const url = `/todo/`
+        const result = await axiosInstance.put(url, { status: checkAll });
         return result?.data;
     } catch (e){
         throw e;

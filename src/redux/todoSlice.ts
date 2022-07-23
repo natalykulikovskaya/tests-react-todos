@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {AxiosError} from "axios";
 
 import { Todo } from "../type/todo";
-import { addTodo, deleteTodo, editTodo, fetchTodos } from "../api/todos";
+import {addTodo, checkAllTodo, deleteTodo, editTodo, fetchTodos} from "../api/todos";
 import {
     ADD_TODO_ERROR,
     DELETE_TODO_ERROR,
@@ -28,7 +29,8 @@ export const fetchTodoSlice = createAsyncThunk(`${SLICE_TODO}/fetchTodos`, async
     try {
         return await fetchTodos();
     } catch (e){
-        return rejectWithValue(e);
+        const actualError = e as AxiosError;
+        return rejectWithValue(actualError.message);
     }
 });
 
@@ -36,14 +38,15 @@ export const addTodoSlice = createAsyncThunk(`${SLICE_TODO}/addTodo`, async (tod
     try {
         return await addTodo(todo);
     } catch (e){
-        return rejectWithValue(e);
+        const actualError = e as AxiosError;
+        return rejectWithValue(actualError.message);
     }
 });
 
 export const deleteTodoSlice = createAsyncThunk(`${SLICE_TODO}/deleteTodo`, async (todo:Todo, {rejectWithValue}) => {
     try {
-        if(todo?.id){
-            return await deleteTodo(todo?.id);
+        if(todo?._id){
+            return await deleteTodo(todo?._id);
         }
        else throw Error(UNVERIFIED_ID_ON_DELETE)
     } catch (e){
@@ -54,6 +57,14 @@ export const deleteTodoSlice = createAsyncThunk(`${SLICE_TODO}/deleteTodo`, asyn
 export const editTodoSlice = createAsyncThunk(`${SLICE_TODO}/editTodo`, async (todo:Todo, {rejectWithValue}) => {
     try {
         return await editTodo(todo);
+    } catch (e){
+        return rejectWithValue(e);
+    }
+});
+
+export const checkAllTodoSlice = createAsyncThunk(`${SLICE_TODO}/checkAllTodo`, async (checkAll: boolean, {rejectWithValue}) => {
+    try {
+        return await checkAllTodo(checkAll);
     } catch (e){
         return rejectWithValue(e);
     }
@@ -70,12 +81,7 @@ export const {actions, reducer} = createSlice({
         })
         .addCase(fetchTodoSlice.fulfilled, (state, { payload }) => {
             state.isLoading = false;
-            state.todos = [
-                {id: 'qqq', name:'sdfsdf', status: false},
-                {id: 'www', name:'sdfsdf', status: false},
-                {id: 'eee', name:'sdfsdf', status: false},
-                {id: 'aaaa', name:'sdfsdf', status: false},
-            ];
+            state.todos = payload;
             state.error = null;
         })
         .addCase(fetchTodoSlice.rejected, (state) => {
@@ -86,8 +92,9 @@ export const {actions, reducer} = createSlice({
             state.isLoading = true;
             state.error = null;
         })
-        .addCase(addTodoSlice.fulfilled, (state) => {
+        .addCase(addTodoSlice.fulfilled, (state, { payload }) => {
             state.isLoading = false;
+            state.todos = [...state.todos, payload];
             state.error = null;
         })
         .addCase(addTodoSlice.rejected, (state) => {
@@ -98,8 +105,9 @@ export const {actions, reducer} = createSlice({
             state.isLoading = true;
             state.error = null;
         })
-        .addCase(deleteTodoSlice.fulfilled, (state) => {
+        .addCase(deleteTodoSlice.fulfilled, (state, { payload}) => {
             state.isLoading = false;
+            state.todos = state.todos.filter(({_id}) => _id !== payload?._id );
             state.error = null;
         })
         .addCase(deleteTodoSlice.rejected, (state) => {
@@ -110,12 +118,26 @@ export const {actions, reducer} = createSlice({
             state.isLoading = true;
             state.error = null;
         })
-        .addCase(editTodoSlice.fulfilled, (state) => {
+        .addCase(editTodoSlice.fulfilled, (state, { payload}) => {
             state.isLoading = false;
+            state.todos = state.todos.map((item) => item?._id === payload?._id ? payload : item)
             state.error = null;
         })
         .addCase(editTodoSlice.rejected, (state) => {
             state.isLoading = false;
             state.error = EDIT_TODO_ERROR;
+        })
+         .addCase(checkAllTodoSlice.pending, (state) => {
+          state.isLoading = true;
+          state.error = null;
+        })
+        .addCase(checkAllTodoSlice.fulfilled, (state) => {
+          state.isLoading = false;
+          state.todos = state.todos.map((item) => ({...item, status: !item.status }))
+          state.error = null;
+         })
+        .addCase(checkAllTodoSlice.rejected, (state) => {
+          state.isLoading = false;
+          state.error = EDIT_TODO_ERROR;
         })
 })
