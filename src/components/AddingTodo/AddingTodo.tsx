@@ -19,7 +19,7 @@ export const AddingTodo = () => {
   }
 
   const addTodo = () => {
-    dispatch(addTodoSlice({ name: inputValue, status: false }))
+    dispatch(addTodoSlice({ name: inputValue.trim(), status: false }))
   }
 
   const checkAllTodos = () => {
@@ -29,13 +29,12 @@ export const AddingTodo = () => {
 
   return (
     <div className={className.container}>
-      <input type="checkbox" onChange={checkAllTodos} checked={checkAll} className={className.check}/>
+      <input type="checkbox" onChange={checkAllTodos} checked={checkAll} className={className.check}  data-testid="check-all-todos-checkbox"/>
       <div className={className.inputWrapper}>
-        <label htmlFor="add-new-todo" className={className.label}>Введите новую цель</label>
-        <input id="add-new-todo" className={className.enterTodo} type="text" value={inputValue} onChange={(e) => handleChange(e)}/>
+        <label htmlFor="add-new-todo" className={className.label} data-testid="add-input-label">Введите новую цель</label>
+        <input id="add-new-todo" className={className.enterTodo} type="text" value={inputValue} onChange={(e) => handleChange(e)} data-testid="add-todo-input"/>
       </div>
-      <button type="button" className={className.addButton} onClick={addTodo}>Add</button>
+      <button data-testid="add-todo-button" type="button" className={className.addButton} onClick={addTodo} disabled={!inputValue.trim()}>Add</button>
     </div>
-
   )
 }

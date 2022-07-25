@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
+import cn from 'classnames'
 
 import { errorSelector, isLoadingSelector, todosSelector } from "../../redux/todosSelector";
 import { deleteTodoSlice, editTodoSlice, fetchTodoSlice } from "../../redux/todoSlice";
@@ -28,16 +29,16 @@ export const Todos = () => {
     }
 
     return (
-    <ul className={className.lists}>
+    <ul className={className.lists} data-test-id="todo-ul">
         {isLoading && <h6>...Загрузка</h6>}
         {!!error && <h6>{error}</h6>}
         {todos?.map((todo) => {
             const {_id, name, status} = todo;
             return (
-              <li key={_id} className={className.todo}>
-                  <input type="checkbox" className={className.check} checked={status} onChange={() => changeCheckState(todo)}/>
-                  <span className={className.name}>{name}</span>
-                  <button type="button" className={className.delete} onClick={() => deleteTodo(todo)}>x</button>
+              <li key={_id} className={className.todo} data-test-id="todo-li">
+                  <input type="checkbox" className={className.check} checked={status} onChange={() => changeCheckState(todo)} data-test-id="todo-input"/>
+                  <span className={cn(className.name, status && className.nameChecked)} data-test-id="todo-name">{name}</span>
+                  <button type="button" className={className.delete} onClick={() => deleteTodo(todo)} data-test-id="todo-delete">x</button>
               </li>
             )
         })}
