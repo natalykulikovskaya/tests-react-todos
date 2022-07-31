@@ -1,49 +1,50 @@
 import { describe, expect, it } from '@jest/globals';
-import { screen, render } from '@testing-library/react';
+import {screen, render, act, fireEvent} from '@testing-library/react';
 
 import { TestWrap } from "../../../test-utils";
 import { AddingTodo } from "../AddingTodo";
+import { mockStore } from "./stub";
 
-describe('addingTodo', () => {
+const initialStore = () => act(() => {
   render (
-    <TestWrap>
+    <TestWrap customStore={mockStore}>
       <AddingTodo/>
     </TestWrap>
   )
+})
 
-  it('is exist add button', () => {
+describe('addingTodo', () => {
+   it('is exist add button', () => {
+     initialStore();
     const addButton = screen.getByTestId('add-todo-button');
     expect(addButton).toBeDefined()
   })
 
   it('is exist input', () => {
+    initialStore();
     const input = screen.getByTestId('add-todo-input');
     expect(input).toBeDefined()
   })
 
   it('button activity if full input', () => {
+    initialStore();
     const addButton = screen.getByTestId('add-todo-button');
     const input = screen.getByTestId('add-todo-input');
-    expect(addButton).toHaveBeenCalled()
+    fireEvent.change(input, { target: { value: "some" } });
+    expect(addButton).toHaveProperty('disabled', false)
   })
 
   it('button disabled if empty input', () => {
+    initialStore();
     const addButton = screen.getByTestId('add-todo-button');
-
+    const input = screen.getByTestId('add-todo-input');
+    fireEvent.change(input, { target: { value: "" } });
+    expect(addButton).toHaveProperty('disabled', true)
   })
 
   it('isAllChecked', () => {
+    initialStore();
     const allChecked = screen.getByTestId('check-all-todos-checkbox');
-    expect(allChecked).toBe(true)
-  })
-
-  it('if check all Checkbox - checked all todos', () => {
-    const allChecked = screen.getByTestId('check-all-todos-checkbox');
-  })
-
-  it('if click add button - todos is in todos array', () => {
-    const allChecked = screen.getByTestId('check-all-todos-checkbox');
-    const todos = [] as string[];
-    expect(todos).toContain(allChecked?.nodeValue);
+    fireEvent.change(allChecked, { target: { checked: true } });
   })
 })

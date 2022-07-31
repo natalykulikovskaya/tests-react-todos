@@ -1,5 +1,5 @@
-import { describe, it } from "@jest/globals";
-import {screen} from "@testing-library/react";
+import { describe, it, expect } from "@jest/globals";
+import { screen } from "@testing-library/react";
 
 describe('footer', () => {
   it('is text footer', () => {

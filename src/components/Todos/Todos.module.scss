@@ -14,11 +14,11 @@
     .name {
       padding-left: $padding10;
       @include widthContainer();
+    }
 
-      .nameChecked {
-        text-decoration: line-through;
-        text-decoration-color: red;
-      }
+    .nameChecked {
+      text-decoration: line-through;
+      text-decoration-color: red;
     }
 
     .check {

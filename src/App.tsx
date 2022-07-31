@@ -1,10 +1,13 @@
 import React from 'react';
+import { Provider } from "react-redux";
+
 import { Todos } from "./components/Todos/Todos";
 import { Layout } from "./components/Layout";
 import { AddingTodo } from "./components/AddingTodo";
 import className from './App.module.scss';
-import { Provider } from "react-redux";
 import { store } from './redux/store';
+import { Tabs } from "./components/Tabs";
+import { Statistic } from "./components/Statistic";
 
 function App() {
   return (
@@ -13,6 +16,8 @@ function App() {
               <main className={className.container}>
                   <AddingTodo />
                   <Todos />
+                  <Statistic />
+                  <Tabs />
               </main>
           </Layout>
       </Provider>

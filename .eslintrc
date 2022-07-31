@@ -1,0 +1,33 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "prefer-arrow-callback": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off", // Since we do not use prop-types
+    "react/require-default-props": "off", // Since we do not use prop-types
+
+    "import/prefer-default-export": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ]
+//    "import/no-extraneous-dependencies": [
+//      "error",
+//      { "devDependencies": ["src/test-utils.tsx", "**/*.test.tsx", "**/*.test.ts"],
+//        "optionalDependencies": false,
+//        "peerDependencies": false
+//      }
+//    ]
+  }
+}

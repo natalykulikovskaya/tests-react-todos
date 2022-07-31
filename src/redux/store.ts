@@ -1,4 +1,4 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { reducer as todos } from './todoSlice';
 
 export const store = configureStore ({
@@ -6,5 +6,6 @@ export const store = configureStore ({
         todos,
     }
 })
+export type Store = ReturnType<typeof configureStore>;
 export type AppDispatch = typeof store['dispatch'];
 export type State = ReturnType<typeof store['getState']>;

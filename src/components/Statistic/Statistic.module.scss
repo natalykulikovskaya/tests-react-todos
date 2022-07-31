@@ -1,0 +1,28 @@
+@import "../../commonStyle/index";
+
+.container {
+    border: $border;
+    @include flexRow(space-between);
+    width: 50%;
+
+    & .block {
+      border-left: $border;
+      padding: $padding5 $padding10;
+      @include flexRow();
+
+      &:first-child {
+        border-left: none;
+      }
+    }
+
+    & .tag {
+      font-size: $fontSize1;
+      width: 20px;
+      height: 20px;
+      margin-left: $padding10;
+      border-radius:$radius-round;
+      background-color: $blue-background;
+      @include flexRow();
+    }
+
+  }

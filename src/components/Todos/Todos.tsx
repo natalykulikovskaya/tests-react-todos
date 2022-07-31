@@ -36,9 +36,9 @@ export const Todos = () => {
             const {_id, name, status} = todo;
             return (
               <li key={_id} className={className.todo} data-test-id="todo-li">
-                  <input type="checkbox" className={className.check} checked={status} onChange={() => changeCheckState(todo)} data-test-id="todo-input"/>
-                  <span className={cn(className.name, status && className.nameChecked)} data-test-id="todo-name">{name}</span>
-                  <button type="button" className={className.delete} onClick={() => deleteTodo(todo)} data-test-id="todo-delete">x</button>
+                  <input type="checkbox" className={className.check} checked={status} onChange={() => changeCheckState(todo)} data-testid="todo-check-input"/>
+                  <span className={cn(className.name, status && className.nameChecked)} data-testid="todo-name">{name}</span>
+                  <button type="button" className={className.delete} onClick={() => deleteTodo(todo)} data-testid="todo-delete">x</button>
               </li>
             )
         })}
