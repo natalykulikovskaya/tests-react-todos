@@ -5,29 +5,28 @@ import { TestWrap } from "../../../test-utils";
 import { AddingTodo } from "../AddingTodo";
 import { mockStore } from "./stub";
 
-const initialStore = () => act(() => {
-  render (
-    <TestWrap customStore={mockStore}>
-      <AddingTodo/>
-    </TestWrap>
-  )
-})
-
 describe('addingTodo', () => {
+  beforeEach(() => {
+    act(() => {
+      render(
+        <TestWrap customStore={mockStore}>
+          <AddingTodo/>
+        </TestWrap>
+      )
+    })
+  })
+
    it('is exist add button', () => {
-     initialStore();
     const addButton = screen.getByTestId('add-todo-button');
     expect(addButton).toBeDefined()
   })
 
   it('is exist input', () => {
-    initialStore();
     const input = screen.getByTestId('add-todo-input');
     expect(input).toBeDefined()
   })
 
   it('button activity if full input', () => {
-    initialStore();
     const addButton = screen.getByTestId('add-todo-button');
     const input = screen.getByTestId('add-todo-input');
     fireEvent.change(input, { target: { value: "some" } });
@@ -35,7 +34,6 @@ describe('addingTodo', () => {
   })
 
   it('button disabled if empty input', () => {
-    initialStore();
     const addButton = screen.getByTestId('add-todo-button');
     const input = screen.getByTestId('add-todo-input');
     fireEvent.change(input, { target: { value: "" } });
@@ -43,7 +41,6 @@ describe('addingTodo', () => {
   })
 
   it('isAllChecked', () => {
-    initialStore();
     const allChecked = screen.getByTestId('check-all-todos-checkbox');
     fireEvent.change(allChecked, { target: { checked: true } });
   })
