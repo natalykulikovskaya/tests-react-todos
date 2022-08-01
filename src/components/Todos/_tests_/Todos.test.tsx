@@ -1,28 +1,41 @@
-import { describe, expect, it } from '@jest/globals';
-import {screen, render, act, fireEvent} from '@testing-library/react';
-import {mockStore, mockStoreEmpty} from "./stub";
+import React from "react"
+import { describe, expect, it, beforeEach, jest, afterEach } from '@jest/globals'
+import { render, act } from '@testing-library/react';
+import { mockStore } from "./stub";
 import { TestWrap } from "../../../test-utils";
 import { Todos } from "../Todos";
-
-const initialStore = () => act(() => {
-  render (
-    <TestWrap customStore={mockStore}>
-      <Todos />
-      </TestWrap>
-  )
-})
+import * as ReactRedux from 'react-redux'
+import {fetchTodoSlice} from "../../../redux/todoSlice";
 
 describe('todos list', () => {
+  const mockDispatch = jest.fn();
+
+  jest.mock('react-redux', () => ({
+    // ...jest.requireActual('react-redux'),
+    useDispatch: () => mockDispatch
+  }));
+
   beforeEach(() => {
-    initialStore();
+
+    act(() => {
+      render (
+          <TestWrap customStore={mockStore}>
+            <Todos />
+          </TestWrap>
+      )
+    })
   })
 
-  // it('is exist list if many todos', () => {
-  //
-  // })
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
 
-  it('is error if not get list', () => {
-    expect(screen.getByText('Ошибка'));
+  it('is list', () => {
+    const spyOnUseDispatch = jest.spyOn(ReactRedux, 'useDispatch')
+
+    expect(mockDispatch).toHaveBeenCalledWith(fetchTodoSlice)
+
+    spyOnUseDispatch.mockRestore()
   })
 
 //   it('is load if get list', () => {
@@ -40,4 +53,5 @@ describe('todos list', () => {
 //   it('if button delete li delete from array', () => {
 //
 //   })
+
 })

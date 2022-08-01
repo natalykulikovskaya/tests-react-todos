@@ -1,0 +1,30 @@
+@import "../../commonStyle/index";
+
+.todo {
+  margin: $margin8 0;
+  padding: $padding5 $padding10;
+  background-color: $light-blue-background;
+  @include flexRow();
+
+  .name {
+    padding-left: $padding10;
+    @include widthContainer();
+  }
+
+  .nameChecked {
+    text-decoration: line-through;
+    text-decoration-color: red;
+  }
+
+  .check {
+    width: 24px;
+    height: 24px;
+    border: $border;
+  }
+
+  .delete {
+    width: 32px;
+    height:32px;
+    font-size: $fontSize12;
+  }
+}
