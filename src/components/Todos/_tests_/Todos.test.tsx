@@ -8,7 +8,7 @@ import { screen } from "@testing-library/react";
 
 import { renderWithProviders } from "../../../test-utils";
 import { Todos } from "../Todos";
-import {mockStoreEmpty, mockStoreLoading} from './stub'
+import { mockStoreEmpty, mockStoreLoading } from './stub'
 
 describe("todos list", () => {
 

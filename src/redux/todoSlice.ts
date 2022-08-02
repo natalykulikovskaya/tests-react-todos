@@ -1,21 +1,16 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {AxiosError} from "axios";
 
-import { Todo } from "../type/todo";
+import {Todo} from "../type/todo";
+import {addTodo, checkAllTodo, deleteTodo, editTodo, fetchTodos,} from "../api/todos";
 import {
-  addTodo,
-  checkAllTodo,
-  deleteTodo,
-  editTodo,
-  fetchTodos,
-} from "../api/todos";
-import {
-  ADD_TODO_ERROR,
-  DELETE_TODO_ERROR,
-  EDIT_TODO_ERROR,
-  FETCH_TODOS_ERROR,
-  UNVERIFIED_ID_ON_DELETE,
+    ADD_TODO_ERROR,
+    DELETE_TODO_ERROR,
+    EDIT_TODO_ERROR,
+    FETCH_TODOS_ERROR,
+    UNVERIFIED_ID_ON_DELETE,
 } from "../constants/errors";
+import {TabsEnum} from "../type/enum";
 
 const SLICE_TODO = "todos";
 
@@ -23,12 +18,14 @@ type Initial_state_Todo = {
   todos: Todo[];
   isLoading: boolean;
   error: string | null;
+  currentTab: TabsEnum;
 };
 
 const initialState: Initial_state_Todo = {
   todos: [],
   isLoading: false,
   error: null,
+  currentTab: TabsEnum.all,
 };
 
 export const fetchTodoSlice = createAsyncThunk(
@@ -93,7 +90,11 @@ export const checkAllTodoSlice = createAsyncThunk(
 export const { actions, reducer } = createSlice({
   name: SLICE_TODO,
   initialState,
-  reducers: {},
+  reducers: {
+      setCurrentTab(state, { payload }){
+          state.currentTab = payload;
+      }
+  },
   extraReducers: (builder) =>
     builder
       .addCase(fetchTodoSlice.pending, (state) => {
@@ -167,3 +168,5 @@ export const { actions, reducer } = createSlice({
         state.error = EDIT_TODO_ERROR;
       }),
 });
+
+export const { setCurrentTab } = actions

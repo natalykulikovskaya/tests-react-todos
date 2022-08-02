@@ -1,22 +1,11 @@
-export const mockStore = {
-  todos: {
-    todos: [
-      {
-        id: 1,
-        name: "aaaa",
-        status: false,
-      },
-    ],
-    isLoading: false,
-    error: false,
-  },
-};
+import {TabsEnum} from "../../../type/enum";
 
 export const mockStoreEmpty = {
   todos: {
     todos: [],
     isLoading: false,
     error: "Ошибка",
+    currentTab: TabsEnum.all
   },
 };
 
@@ -25,5 +14,6 @@ export const mockStoreLoading = {
     todos: [],
     isLoading: true,
     error: null,
+    currentTab: TabsEnum.all
   },
 };

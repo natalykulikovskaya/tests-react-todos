@@ -42,3 +42,8 @@ export const errorSelector = createSelector(
   todosSliceSelector,
   (state) => state.error
 );
+
+export const currentTabSelector = createSelector(
+    todosSliceSelector,
+    (state) => state.currentTab
+);

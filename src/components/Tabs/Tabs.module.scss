@@ -1,0 +1,39 @@
+@import "../../commonStyle/index";
+
+.container {
+  width: 50%;
+  margin-top: $padding10;
+  @include flexRow(space-between);
+
+  .tab {
+    background-color: $light-blue-background;
+    border: $radius;
+    padding: $padding10;
+    margin-right: $padding10;
+
+    &:hover {
+      background-color: $blue-background;
+      cursor: pointer;
+    }
+  }
+
+  .active {
+    color: $white;
+    background-color: $blue-background;
+  }
+
+  .delete {
+    height: 50px;
+    min-width: 120px;
+    padding: $padding10;
+    border: $border;
+    border-radius: $radius;
+    background-color: $darkBlue;
+    color: $white;
+    font-size: $fontSize12;
+    cursor: pointer;
+    &:hover {
+      background-color: #0d69f2;
+    }
+  }
+}

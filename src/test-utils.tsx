@@ -24,6 +24,7 @@ import type { PreloadedState } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import {AppStore, State} from "./redux/store";
 import { reducer as todosReducer } from "./redux/todoSlice";
+import {TabsEnum} from "./type/enum";
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -35,7 +36,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 export function renderWithProviders(
     ui: React.ReactElement,
     {
-      preloadedState = {todos: { todos: [], isLoading: false, error: null}},
+      preloadedState = {todos: { todos: [], isLoading: false, error: null, currentTab: TabsEnum.all}},
       // Automatically create a store instance if no store was passed in
       store = configureStore({ reducer: { todos: todosReducer }, preloadedState }),
       ...renderOptions

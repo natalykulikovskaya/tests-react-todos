@@ -24,7 +24,7 @@ export const Statistic = () => {
         <span className={classNames.tag}>{completeTodosCount}</span>
       </div>
       <div className={classNames.block}>
-        <span>Необходимо выполнить</span>
+        <span>Выполни</span>
         <span className={classNames.tag}>{unCompleteTodosCount}</span>
       </div>
     </div>

@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended"],
   "parser": "@typescript-eslint/parser",
   "env": {
     "es6": true,
@@ -12,7 +12,9 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off", // Since we do not use prop-types
-    "react/require-default-props": "off", // Since we do not use prop-types
+    "react/require-default-props": "off", // Since we do not use prop-
+    "@typescript-eslint/no-empty-function":"off",
+
 
     "import/prefer-default-export": "off",
     "no-param-reassign": [

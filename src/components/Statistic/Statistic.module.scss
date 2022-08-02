@@ -22,6 +22,7 @@
       margin-left: $padding10;
       border-radius:$radius-round;
       background-color: $blue-background;
+      color: $white;
       @include flexRow();
     }
 

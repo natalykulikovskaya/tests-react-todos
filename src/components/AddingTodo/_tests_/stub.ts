@@ -1,3 +1,5 @@
+import {TabsEnum} from "../../../type/enum";
+
 export const mockStore = {
   todos: {
     todos: [
@@ -9,5 +11,6 @@ export const mockStore = {
     ],
     isLoading: false,
     error: null,
+    currentTab: TabsEnum.all,
   },
 };
