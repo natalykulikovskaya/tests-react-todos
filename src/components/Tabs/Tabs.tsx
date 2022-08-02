@@ -18,6 +18,7 @@ export const Tabs = () => {
   return (
     <div className={className.container}>
       <button
+          data-testid={TabsEnum.all}
           type="button"
           className={cn(className.tab, activeTab === TabsEnum.all && className.active)}
           onClick={() => handleTabClick(TabsEnum.all)}
@@ -25,6 +26,7 @@ export const Tabs = () => {
           Все
       </button>
       <button
+          data-testid={TabsEnum.complete}
           type="button"
           className={cn(className.tab, activeTab === TabsEnum.complete && className.active)}
           onClick={() => handleTabClick(TabsEnum.complete)}
@@ -32,6 +34,7 @@ export const Tabs = () => {
           Завершенные
       </button>
       <button
+          data-testid={TabsEnum.unComplete}
           type="button"
           className={cn(className.tab, activeTab === TabsEnum.unComplete && className.active)}
           onClick={() => handleTabClick(TabsEnum.unComplete)}

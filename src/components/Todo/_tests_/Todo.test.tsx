@@ -16,7 +16,7 @@ describe("todo", () => {
     renderWithProviders(<TodoItem todo={todo} />)
 
     userEvent.click(screen.getByTestId('todo-check-input'));
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     expect(screen.queryByTestId('todo-check-input')).toBeCheked;
   });
 
@@ -27,9 +27,7 @@ describe("todo", () => {
       status: true,
     }
     renderWithProviders(<TodoItem todo={todo} />)
-    // @ts-ignore
     expect(screen.queryByTestId('todo-check-input')).toBeCheked;
-    // @ts-ignore
     expect(screen.getByTestId('todo-name')).toHaveClass('nameChecked');
   });
 });
