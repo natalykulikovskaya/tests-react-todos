@@ -1,5 +1,5 @@
 import React from "react";
 
 export type LayoutProps = {
-  children: React.ReactElement
-}
+  children: React.ReactElement;
+};

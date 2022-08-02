@@ -1,8 +1,5 @@
-import { describe, it} from '@jest/globals'
+import { describe, it } from "@jest/globals";
 
-describe('todo', () => {
-
-  it('is item', () => {
-  })
-
-})
+describe("todo", () => {
+  it("is item", () => {});
+});

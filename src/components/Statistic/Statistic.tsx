@@ -6,7 +6,7 @@ import {
   unCompleteCountSelector,
 } from "../../redux/todosSelector";
 
-import classNames from './Statistic.module.scss';
+import classNames from "./Statistic.module.scss";
 
 export const Statistic = () => {
   const allTodosCount = useSelector(todosCountSelector);
@@ -28,5 +28,5 @@ export const Statistic = () => {
         <span className={classNames.tag}>{unCompleteTodosCount}</span>
       </div>
     </div>
-  )
-}
+  );
+};

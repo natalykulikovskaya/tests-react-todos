@@ -1,16 +1,14 @@
 import { describe, it, expect } from "@jest/globals";
-import { screen, render} from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
-import { Header } from '../Header'
-import {TestWrap} from "../../../test-utils";
+import { Header } from "../Header";
+import { renderWithProviders } from "../../../test-utils";
 
-describe('header-test', () => {
-  it('is header text', () => {
-    render(
-      <TestWrap>
-      <Header />
-      </TestWrap>
-    )
-    expect(screen.getByTestId('text-header').textContent).toBe('Добро пожаловать. Ставьте цели и достигайте их!');
-  })
-})
+describe("header-test", () => {
+  it("is header text", () => {
+    renderWithProviders(<Header />);
+    expect(screen.getByTestId("text-header").textContent).toBe(
+      "Добро пожаловать. Ставьте цели и достигайте их!"
+    );
+  });
+});

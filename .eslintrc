@@ -21,13 +21,7 @@
         "props": true,
         "ignorePropertyModificationsFor": ["state"]
       }
-    ]
-//    "import/no-extraneous-dependencies": [
-//      "error",
-//      { "devDependencies": ["src/test-utils.tsx", "**/*.test.tsx", "**/*.test.ts"],
-//        "optionalDependencies": false,
-//        "peerDependencies": false
-//      }
-//    ]
+    ],
+    "no-useless-catch": "off"
   }
 }

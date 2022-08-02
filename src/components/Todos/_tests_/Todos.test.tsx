@@ -1,57 +1,36 @@
-import React from "react"
-import { describe, expect, it, beforeEach, jest, afterEach } from '@jest/globals'
-import { render, act } from '@testing-library/react';
-import { mockStore } from "./stub";
-import { TestWrap } from "../../../test-utils";
+import React from "react";
+import {
+  describe,
+  expect,
+  it,
+} from "@jest/globals";
+import { screen } from "@testing-library/react";
+
+import { renderWithProviders } from "../../../test-utils";
 import { Todos } from "../Todos";
-import * as ReactRedux from 'react-redux'
-import {fetchTodoSlice} from "../../../redux/todoSlice";
+import {mockStoreEmpty, mockStoreLoading} from './stub'
 
-describe('todos list', () => {
-  const mockDispatch = jest.fn();
+describe("todos list", () => {
 
-  jest.mock('react-redux', () => ({
-    // ...jest.requireActual('react-redux'),
-    useDispatch: () => mockDispatch
-  }));
+  it("is list", () => {
+    renderWithProviders(<Todos />)
+    expect(screen.findByRole('list')).toBeDefined()
+  });
 
-  beforeEach(() => {
+  it("is not list", () => {
+    renderWithProviders(<Todos />, { preloadedState: mockStoreEmpty })
+    expect(screen.queryByRole('list')).toBeFalsy()
+  });
 
-    act(() => {
-      render (
-          <TestWrap customStore={mockStore}>
-            <Todos />
-          </TestWrap>
-      )
-    })
-  })
+  it("is error", () => {
+    renderWithProviders(<Todos />, { preloadedState: mockStoreEmpty })
+    expect(screen.findByText('Ошибка')).toBeTruthy()
+  });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  })
+  it("is loader", () => {
+    renderWithProviders(<Todos />, { preloadedState: mockStoreLoading })
+    expect(screen.findByText(/Загрузка/)).toBeTruthy()
+  });
+});
 
-  it('is list', () => {
-    const spyOnUseDispatch = jest.spyOn(ReactRedux, 'useDispatch')
-
-    expect(mockDispatch).toHaveBeenCalledWith(fetchTodoSlice)
-
-    spyOnUseDispatch.mockRestore()
-  })
-
-//   it('is load if get list', () => {
-//
-//   })
-//
-//   it('if checkbox checked li text-decoration: line-through', () => {
-//     initialStore();
-//     const todoChecked = screen.getByTestId('todo-check-input');
-//     const textTodoChecked = screen.getByTestId('todo-name');
-//     fireEvent.change(todoChecked, { target: { checked: true } });
-//     expect(textTodoChecked).toHaveProperty('style', {textDecoration: 'line-through'})
-//   })
-//
-//   it('if button delete li delete from array', () => {
-//
-//   })
-
-})
+export {};

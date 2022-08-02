@@ -1,0 +1,11 @@
+{
+  "globals": {
+    "ts-jest": {
+      "isolatedModules": false
+    }
+  },
+  "testEnvironment": "jsdom",
+  "testRegex": "(/__tests__/.*|(\\.|/)(test))\\.tsx?$",
+  "modulePathIgnorePatterns": ["/__tests__/stub.ts"],
+  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"]
+}

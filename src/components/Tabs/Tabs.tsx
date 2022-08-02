@@ -4,7 +4,9 @@ export const Tabs = () => {
       <div>Все</div>
       <div>Завершенные</div>
       <div>Незавершенные</div>
-      <button type="button" onClick={() => {}}>Delete</button>
+      <button type="button" onClick={() => {}}>
+        Delete
+      </button>
     </div>
-  )
-}
+  );
+};
