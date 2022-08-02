@@ -1,11 +1,18 @@
 import { State } from "./store";
 import { createSelector } from "@reduxjs/toolkit";
+import {TabsEnum} from "../type/enum";
 
 export const todosSliceSelector = (state: State) => state.todos;
 
 export const todosSelector = createSelector(
   todosSliceSelector,
-  (state) => state?.todos ?? []
+  (state) => {
+      switch (state.currentTab){
+          case TabsEnum.complete: return state?.todos.filter(({ status }) => status) ?? [];
+          case TabsEnum.unComplete: return state?.todos.filter(({ status }) => !status ?? []);
+          default: return state?.todos ?? [];
+      }
+  }
 );
 
 export const todosCountSelector = createSelector(
