@@ -32,6 +32,9 @@
     &:hover {
       background-color: #0d69f2;
     }
+    &:disabled {
+      background-color: #ccc;
+    }
   }
 
   .check {

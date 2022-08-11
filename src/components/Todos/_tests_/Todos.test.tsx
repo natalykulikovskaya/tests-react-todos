@@ -10,27 +10,25 @@ import { renderWithProviders } from "../../../test-utils";
 import { Todos } from "../Todos";
 import { mockStoreEmpty, mockStoreLoading } from './stub'
 
-describe("todos list", () => {
+describe("todos list block", () => {
 
-  it("is list", () => {
+  it("if list have items than it exist on page", () => {
     renderWithProviders(<Todos />)
     expect(screen.findByRole('list')).toBeDefined()
   });
 
-  it("is not list", () => {
+  it("if list empty than it hide from page", () => {
     renderWithProviders(<Todos />, { preloadedState: mockStoreEmpty })
     expect(screen.queryByRole('list')).toBeFalsy()
   });
 
-  it("is error", () => {
+  it("if exit error after get todos show it on page", () => {
     renderWithProviders(<Todos />, { preloadedState: mockStoreEmpty })
     expect(screen.findByText('Ошибка')).toBeTruthy()
   });
 
-  it("is loader", () => {
+  it("show loader if todos request already not finally", () => {
     renderWithProviders(<Todos />, { preloadedState: mockStoreLoading })
     expect(screen.findByText(/Загрузка/)).toBeTruthy()
   });
 });
-
-export {};

@@ -6,8 +6,8 @@ import { renderWithProviders } from "../../../test-utils";
 
 import { TodoItem } from "../Todo";
 
-describe("todo", () => {
-  it("is item", () => {
+describe("todo item block", () => {
+  it("item checkbox change if click on it", () => {
     const todo = {
       id: 1,
       name: "aaaa",
@@ -16,11 +16,10 @@ describe("todo", () => {
     renderWithProviders(<TodoItem todo={todo} />)
 
     userEvent.click(screen.getByTestId('todo-check-input'));
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     expect(screen.queryByTestId('todo-check-input')).toBeCheked;
   });
 
-  it("is item throw-line name", () => {
+  it("item has throw-line class then checkbox is checked", () => {
     const todo = {
       id: 1,
       name: "aaaa",

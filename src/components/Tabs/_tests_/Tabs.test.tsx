@@ -7,9 +7,9 @@ import { renderWithProviders } from "../../../test-utils"
 import { Tabs } from "../Tabs";
 
 
-describe("tabs", () => {
+describe("tabs block", () => {
 
-  it("active tab", () => {
+  it("tab is active if user click on it", () => {
     renderWithProviders(<Tabs/>);
     userEvent.click(screen.getByTestId(TabsEnum.all));
     expect(screen.getByTestId(TabsEnum.all)).toHaveClass('active');

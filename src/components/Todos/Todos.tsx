@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import {useCallback, useEffect} from "react";
+import { useEffect} from "react";
 
 import {
-  currentTabSelector,
   errorSelector,
   isLoadingSelector,
   todosSelector,

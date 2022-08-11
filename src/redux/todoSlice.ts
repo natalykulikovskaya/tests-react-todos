@@ -14,14 +14,14 @@ import {TabsEnum} from "../type/enum";
 
 const SLICE_TODO = "todos";
 
-type Initial_state_Todo = {
+export type InitialStateTodo = {
   todos: Todo[];
   isLoading: boolean;
   error: string | null;
   currentTab: TabsEnum;
 };
 
-const initialState: Initial_state_Todo = {
+const initialState: InitialStateTodo = {
   todos: [],
   isLoading: false,
   error: null,
